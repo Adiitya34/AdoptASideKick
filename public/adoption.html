@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found Pets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Source+Sans+Pro:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #47b731; /* Old color theme */
+            --secondary: #ffffff;
+            --background: #ffffff; /* White background */
+            --text: #000000;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            margin: 0;
+            color: var(--text);
+            background: var(--background);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        nav {
+            background-color: var(--primary);
+            width: 100%;
+            padding: 1rem 0;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        nav a {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            position: relative;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .background .left,
+        .background .right {
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .background .left {
+            bottom: 0;
+            left: 0;
+            background-image: url('https://i.postimg.cc/JzP073w9/tumblr-oefykg-Way-Y1vcoikjo1-540.gif');
+        }
+
+        .background .right {
+            bottom: 0;
+            right: 0;
+            background-image: url('https://i.postimg.cc/JzP073w9/tumblr-oefykg-Way-Y1vcoikjo1-540.gif');
+        }
+
+        main {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        iframe {
+            width: 800px;
+            max-width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="lost-found.html">AdoptASideKick Adoption Database</a>
+    </nav>
+    <div class="background">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <main>
+        <h1>Not all heroes wear capes, some wear collars</h1>
+        <iframe src="https://airtable.com/embed/appxnWhNjpCMvBeVN/shrSJj0CUVHQ16ehC?viewControls=on"></iframe>
+    </main>
+</body>
+</html>

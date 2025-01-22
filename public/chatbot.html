@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veterinary Chatbot 🐾</title>
+    <!-- Google Web Fonts --> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+
+            /* Preloader Styles */
+         @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Rampart+One&family=Reem+Kufi+Ink&display=swap');
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #EB7E1F;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.preloader.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+}
+
+.preloader-image {
+    width: 200px;
+    height: auto;
+}
+
+.preloader-title {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 24px;
+    font-family: 'Amatic SC', cursive;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: 24px;
+    font-family: 'Amatic SC', cursive;
+    letter-spacing: 2px;
+}
+
+@keyframes preloader-rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+        /* Global styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+            color: #2d3e50;
+            margin-top: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: transform 0.5s ease;
+        }
+
+        /* Add a background image and smooth transition */
+        .hero {
+    background: url('https://i.postimg.cc/9QJQ6LyZ/view-cats-dogs-being-friends-23-2151806276.jpg') center/cover no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items at the top */
+    align-items: flex-start; /* Align items to the left */
+    color: white;
+    padding: 20px;
+    transition: all 0.5s ease;
+}
+
+.hero h1 {
+    font-size: 46px;
+    margin: 0; /* Remove top margin */
+    padding: 10px 20px; /* Add padding for spacing */
+    transform: translateY(0); /* Remove animation offset */
+}
+
+.quote {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-style: italic;
+    color: #28a745; /* Green color for the quote */
+    margin: 10px 20px; /* Adjust margin for spacing */
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+}
+
+
+        /* Smooth transition for quote */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Chatbot styling */
+        .tidio-chat-widget {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* Button to reset chat */
+        .reset-button {
+            background-color: #ff7f50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .reset-button:hover {
+            background-color: #ff5722;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- preloader -->
+
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+
+           
+            <img class="preloader-image" src=" https://assets-v2.lottiefiles.com/a/009fccf8-1171-11ee-b7df-93d19199ced4/18pL8Oc9l6.gif" alt="Loading">
+            <!-- Alternate preloader -->
+            <!-- <img class="preloader-image" src="https://i.postimg.cc/4xjDMtms/cool-loading-animated-gif-1.gif" alt="Loading"> -->
+            <!-- <h2 class="preloader-title">Adopt A SideKick</h2> -->
+        </div>
+    </div>
+
+<!-- Hero Section with background and quote -->
+<div class="hero">
+    <h1>Veterinary Care Chatbot</h1>
+    <p class="quote">Think of me as your pet’s personal therapist<br>—
+        except, instead of talking, I just fix them. hehe :)</p>
+    <!-- <button class="reset-button" onclick="resetChat()">Reset Chat</button> -->
+</div>
+
+<!-- Tidio Chatbot Embed Code -->
+<script src="https://code.tidio.co/r8nu2hlcqjnembeyw7bcijlzkrblca3y.js" async></script>
+
+<script>
+    // Function to reset the chatbot
+    function resetChat() {
+        // Clear cookies to reset the session
+        document.cookie.split(';').forEach(function(c) {
+            document.cookie = c.trim().split('=')[0] + '=;expires=' + new Date(0).toUTCString() + ';path=/';
+        });
+
+        // Wait for Tidio chat widget to load and reset the chat
+        if (window.TidioChat) {
+            // Close the chat window
+            TidioChat.close();
+            
+            // After a short delay, open the chat window again to simulate a reset
+            setTimeout(function() {
+                TidioChat.open();
+            }, 500); // Delay in milliseconds (500ms)
+        } else {
+            console.error("TidioChat API not loaded yet.");
+        }
+    }
+
+    // Adding transition to h1 on page load
+    window.addEventListener('load', function() {
+        document.querySelector('h1').style.transform = 'translateY(0)';
+    });
+
+    
+    setTimeout(function() {
+            document.getElementById("preloader").classList.add("hide");
+        }, 2500);
+
+</script>
+
+</body>
+</html>

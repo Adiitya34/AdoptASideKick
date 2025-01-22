@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feeding Initiative - Donate</title>
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
+</head>
+
+<style>
+    /* Base styles */
+    :root {
+        --primary: #059669;
+        --primary-dark: #065f46;
+        --secondary: #0891b2;
+        --bg-gradient: linear-gradient(135deg, #ecfdf5 0%, #ecfeff 100%);
+        --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background: var(--bg-gradient);
+        min-height: 100vh;
+        color: var(--primary-dark);
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+        opacity: 0;
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    /* Header styles */
+    header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        padding: 1.2rem;
+        background: var(--primary);
+        border-radius: 50%;
+        color: white;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        cursor: pointer;
+    }
+
+    .logo:hover {
+        transform: rotate(15deg) scale(1.1);
+        box-shadow: var(--shadow-lg);
+    }
+
+    h1 {
+        font-size: 2.75rem;
+        color: var(--primary-dark);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    h1:hover::after {
+        transform: scaleX(1);
+    }
+
+    /* Section styles */
+    section {
+        background: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+
+    section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transform: scaleX(0);
+        transition: var(--transition);
+    }
+
+    section:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    section:hover::before {
+        transform: scaleX(1);
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .section-header i {
+        font-size: 1.5rem;
+        color: var(--primary);
+    }
+
+    /* QR Code styles */
+    .qr-container {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .qr-code {
+        width: 220px;
+        height: 220px;
+        border-radius: 1rem;
+        margin: 1rem auto;
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .qr-code:hover {
+        transform: scale(1.08);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Upload styles */
+    .upload-zone {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+border: 3px dashed #a5f3fc;
+border-radius: 1rem;
+padding: 2.5rem;
+text-align: center;
+cursor: pointer;
+transition: var(--transition);
+background: linear-gradient(45deg, #f0fdfa, #ecfeff);
+gap: 1rem; /* Add spacing between elements */
+}
+
+.upload-zone i {
+font-size: 2.5rem;
+color: var(--secondary);
+animation: pulse 2s infinite;
+}
+
+.upload-zone p {
+margin: 0;
+color: var(--primary-dark);
+}
+
+    /* Recent donations grid */
+    .donations-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2.5rem;
+    }
+
+    .donation-card {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .donation-card:hover {
+        transform: translateY(-8px) rotate(1deg);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .donation-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+
+    .donation-card:hover img {
+        transform: scale(1.1);
+    }
+
+    .donation-info {
+        padding: 1.25rem;
+        text-align: center;
+        background: white;
+    }
+
+    /* Footer styles */
+    footer {
+        text-align: center;
+        margin-top: 5rem;
+        padding: 2rem;
+        opacity: 0.9;
+        transition: var(--transition);
+    }
+
+    footer:hover {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        section {
+            padding: 1.75rem;
+        }
+
+        .donations-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            font-size: 1.5rem;
+        }
+    }
+
+    #uploadWidget {
+            background-color: var(--primary);
+           
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        #uploadWidget:hover {
+            background-color: var(--secondary);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+         /* Preloader Styles */
+         /* Preloader Styles */
+         @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Rampart+One&family=Reem+Kufi+Ink&display=swap');
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #EB7E1F;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.preloader.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+}
+
+.preloader-image {
+    width: 200px;
+    height: auto;
+}
+
+.preloader-title {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 24px;
+    font-family: 'Amatic SC', cursive;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: 24px;
+    font-family: 'Amatic SC', cursive;
+    letter-spacing: 2px;
+}
+
+@keyframes preloader-rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+</style>
+<body>
+
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <img class="preloader-image" src="https://assets-v2.lottiefiles.com/a/009fccf8-1171-11ee-b7df-93d19199ced4/18pL8Oc9l6.gif" alt="Loading">
+            <!-- <h2 class="preloader-title">Adopt A SideKick</h2> -->
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo" title="Feeding Initiative"> 🐾 </div>
+            <h1>Support Our Feeding Initiative</h1>
+            <p><b>Feed a stray today—because they can't just 'order in' like the rest of us.</b></p>
+        </header>
+
+        <main>
+            <section>
+                <div class="section-header">
+                    <i>❤️</i>
+                    <h2>Donate via QR Code</h2>
+                </div>
+                <div class="qr-container">
+                    <img class="qr-code" src="https://i.postimg.cc/R034Nxvg/Screenshot-20241219-173813-Phone-Pe.jpg" alt="Payment QR Code">
+                    <p><b>All Donations will be forwarded to <a href="https://www.instagram.com/thecaninehelp?igsh=ZDhkaGpteDZ2d3B3">@thecaninehelp </a> </b></p>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header">
+                    <i>📸</i>
+                    <h2>Submit Payment Screenshot</h2>
+                </div>
+                <label class="upload-zone" for="screenshot-upload">
+                    <button id="uploadWidget">Upload Screenshot</button>
+                <p id="uploaded-image-url"></p>
+
+                </label>
+
+                <!-- Cloudinary Upload Button -->
+                
+                <div class="donations-grid">
+                    <div class="donation-card">
+                        <img src="https://images.unsplash.com/photo-1548681528-6a5c45b66b42" alt="Donation">
+                        <div class="donation-info">
+                            <p>They can’t buy their own food—so, it’s up to you to stop their ‘sad puppy eyes’ from getting worse.</p>
+                        </div>
+                    </div>
+                    <div class="donation-card">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba" alt="Donation">
+                        <div class="donation-info">
+                            <p>Your donation could turn ‘bark’ into ‘thank you’</p>
+                        </div>
+                    </div>
+                    <div class="donation-card">
+                        <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5" alt="Donation">
+                        <div class="donation-info">
+                            <p>Feed a stray today—because even a little kindness goes a long way!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>❤️ Thank you for your support!</p>
+            <p>Together we can make their lives better</p>
+        </footer>
+    </div>
+
+    <script>
+
+        setTimeout(function() {
+            document.getElementById("preloader").classList.add("hide");
+        }, 2300);
+
+        // Cloudinary upload widget setup
+        const cloudinaryWidget = cloudinary.createUploadWidget(
+            {
+                cloudName: 'di88wvguz', // Replace with your Cloudinary cloud name
+                uploadPreset: 'AdoptASideKick', // Replace with your upload preset
+            },
+            (error, result) => {
+                if (!error && result && result.event === 'success') {
+                    // Display uploaded image URL
+                    document.getElementById('uploaded-image-url').textContent = `Uploaded image URL: ${result.info.secure_url}`;
+                    document.getElementById('uploaded-image-url').style.color = '#059669';
+                }
+            }
+        );
+
+        // Trigger upload widget when button is clicked
+        document.getElementById("uploadWidget").addEventListener("click", () => {
+            cloudinaryWidget.open();
+        });
+
+        // Handle file upload with drag and drop
+        const fileInput = document.getElementById('screenshot-upload');
+        const uploadText = document.getElementById('upload-text');
+        const uploadZone = document.querySelector('.upload-zone');
+
+        fileInput.addEventListener('change', handleFileSelect);
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.style.borderColor = '#0891b2';
+            uploadZone.style.transform = 'scale(1.02)';
+        });
+
+        uploadZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadZone.style.borderColor = '#a5f3fc';
+            uploadZone.style.transform = 'scale(1)';
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.style.borderColor = '#a5f3fc';
+            uploadZone.style.transform = 'scale(1)';
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect({ target: fileInput });
+            }
+        });
+
+        function handleFileSelect(e) {
+            if (e.target.files && e.target.files[0]) {
+                const file = e.target.files[0];
+                uploadText.textContent = `Selected: ${file.name}`;
+                uploadText.style.color = '#059669';
+            }
+        }
+
+        // Add interactive effects
+        document.querySelectorAll('.donation-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${(y - rect.height/2) / 20}deg)
+                    rotateY(${(x - rect.width/2) / 20}deg)
+                    translateY(-8px)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // Logo animation
+        const logo = document.querySelector('.logo');
+        logo.addEventListener('click', () => {
+            logo.style.transform = 'rotate(360deg) scale(1.1)';
+            setTimeout(() => {
+                logo.style.transform = '';
+            }, 1000);
+        });
+
+
+    </script>
+</body>
+</html>

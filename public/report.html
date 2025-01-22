@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Animal Mistreatment</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #4CAF50;
+            --accent: #81C784;
+            --background: rgba(241, 248, 233, 0.9);
+            --text: #1B5E20;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(46, 125, 50, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: url('https://i.postimg.cc/bJcND1rJ/videoplayback-ezgif-com-video-to-gif-converter-4.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: var(--primary);
+            padding: 1rem;
+            box-shadow: 0 2px 8px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Saira', sans-serif;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        main {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.306); /* Adjusted transparency */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-family: 'Saira', sans-serif;
+
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            resize: vertical;
+            font-family: 'Inter', sans-serif;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Saira', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 1rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Preloader Styles */
+         /* Preloader Styles */
+         @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Rampart+One&family=Reem+Kufi+Ink&display=swap');
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #EB7E1F;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.preloader.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+}
+
+.preloader-image {
+    width: 200px;
+    height: auto;
+}
+
+.preloader-title {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 24px;
+    font-family: 'Amatic SC', cursive;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: 24px;
+    font-family: 'Amatic SC', cursive;
+    letter-spacing: 2px;
+}
+
+@keyframes preloader-rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+    </style>
+    <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+</head>
+<body>
+
+        
+
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <img class="preloader-image" src="https://assets-v2.lottiefiles.com/a/009fccf8-1171-11ee-b7df-93d19199ced4/18pL8Oc9l6.gif" alt="Loading">
+            <!-- <h2 class="preloader-title">Adopt A SideKick</h2> -->
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="report.html">Report Mistreatment</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="form-container">
+            <h1>Report Animal Mistreatment</h1>
+            <textarea 
+                id="report-description"
+                placeholder="Please describe the incident in detail. Include the location, time, and any relevant information..."
+                required
+            ></textarea>
+            <button type="button" id="submitReportButton">Upload Proof and Submit Report</button>
+            <div class="success-message" id="success-message">
+                <p><strong>Thank you for reporting!</strong></p>
+                <p>We have successfully recorded your report along with the uploaded proof.</p>
+                <p><strong>For further action, report this incident to PETA:</strong></p>
+                <p><a href="https://www.peta.org/about-peta/contact-peta/report-cruelty/" target="_blank" style="color: var(--secondary); font-weight: bold;">Click here to report to PETA</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let uploadedImageUrl = '';
+
+        const cloudinaryWidget = cloudinary.createUploadWidget({
+            cloudName: 'di88wvguz',
+            uploadPreset: 'Mistreatment',
+            sources: ['local', 'url', 'camera'],
+            multiple: false,
+            cropping: true,
+            resourceType: 'image',
+        }, (error, result) => {
+            if (!error && result && result.event === 'success') {
+                uploadedImageUrl = result.info.secure_url;
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('submitReportButton').disabled = true;
+                document.getElementById('report-description').value = '';
+            }
+        });
+
+        document.getElementById('submitReportButton').addEventListener('click', function () {
+            cloudinaryWidget.open();
+        });
+
+        setTimeout(function() {
+            document.getElementById("preloader").classList.add("hide");
+        }, 2300);
+    </script>
+</body>
+</html>

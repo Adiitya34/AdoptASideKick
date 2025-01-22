@@ -1,0 +1,92 @@
+/* General body and form styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-image: url('https://i.postimg.cc/2SdbmGqd/videoplayback-ezgif-com-video-to-gif-converter-3.gif'); 
+  background-repeat: no-repeat; /* Prevents the GIF from repeating */
+  background-size: cover; /* Ensures the GIF covers the entire screen */
+  background-position: center; /* Centers the GIF */
+}
+
+/* Center the login form */
+.login-form {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  z-index: 2; /* Ensure the form is above the overlay */
+}
+
+h3 {
+  text-align: center;
+  color: #198754;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 14px;
+  color: #555;
+}
+
+input.form-control {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+input.form-control:focus {
+  border-color: #198754;
+  outline: none;
+}
+
+.btn-primary {
+  background-color: #198754;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+}
+
+.forgot-password {
+  text-align: right;
+  font-size: 14px;
+}
+
+.forgot-password a {
+  color: #198754;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+/* Google sign-in button styling (customize as per your component) */
+.signin-google-btn {
+  background-color: #4285f4;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.signin-google-btn:hover {
+  background-color: #357ae8;
+}

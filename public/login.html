@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign-Up</title>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+    <style>
+        /* CSS to style the forms */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            color: green;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sign-Up Form -->
+    <div class="form-container" id="signup-container">
+        <h2>Sign Up</h2>
+        <form id="sign-up-form">
+            <input type="email" id="signup-email" placeholder="Enter Email" required>
+            <input type="password" id="signup-password" placeholder="Enter Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="javascript:void(0)" onclick="showLogin()">Login</a></p>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-container" id="login-container" style="display: none;">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="email" id="login-email" placeholder="Enter Email" required>
+            <input type="password" id="login-password" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="javascript:void(0)" onclick="showSignUp()">Sign Up</a></p>
+    </div>
+
+    <div id="message"></div>
+    <div id="error-message" class="error"></div>
+
+    <script>
+        // Firebase Config Object (Replace with your own Firebase configuration)
+        const firebaseConfig = {
+          apiKey: "AIzaSyC2d76FDcJIx2cc993KF-qfaWhD39vrqHQ",
+          authDomain: "adoptasidekick.firebaseapp.com",
+          projectId: "adoptasidekick",
+          storageBucket: "adoptasidekick.firebasestorage.app",
+          messagingSenderId: "933622311491",
+          appId: "1:933622311491:web:329016fc1cb5441aa4c2f6"
+        };
+
+        // Initialize Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js';
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Show the Sign-Up form and hide the Login form
+        function showSignUp() {
+            document.getElementById('signup-container').style.display = 'block';
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('message').textContent = '';
+            document.getElementById('error-message').textContent = '';
+        }
+
+        // Show the Login form and hide the Sign-Up form
+        function showLogin() {
+            document.getElementById('signup-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+            document.getElementById('message').textContent = '';
+            document.getElementById('error-message').textContent = '';
+        }
+
+        // Sign-Up Logic
+        document.getElementById('sign-up-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    document.getElementById('message').textContent = `Sign-up successful! Welcome, ${user.email}`;
+                    document.getElementById('error-message').textContent = '';
+                    showLogin(); // Show Login form after successful sign-up
+                })
+                .catch((error) => {
+                    document.getElementById('error-message').textContent = error.message;
+                });
+        });
+
+        // Login Logic
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    document.getElementById('message').textContent = `Login successful! Welcome back, ${user.email}`;
+                    document.getElementById('error-message').textContent = '';
+                })
+                .catch((error) => {
+                    document.getElementById('error-message').textContent = error.message;
+                });
+        });
+
+        // Initialize with Sign-Up form
+        showSignUp();
+    </script>
+</body>
+
+</html>

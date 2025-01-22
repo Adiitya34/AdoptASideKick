@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found Pets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #4CAF50;
+            --accent: #81C784;
+            --background: #F1F8E9;
+            --text: #1B5E20;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(46, 125, 50, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: url('https://i.postimg.cc/bJcND1rJ/videoplayback-ezgif-com-video-to-gif-converter-4.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: var(--primary);
+            padding: 1rem;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            
+            margin-bottom: 2rem;
+            text-align: center;
+            font-family: 'Saira', sans-serif;
+            color: rgb(0, 0, 0);
+        }
+
+        h2 {
+            color: white; /* Changed to white */
+            text-align: center;
+            font-family: 'Saira', sans-serif;
+            font-size: 24px;
+            margin-top: 1rem;
+        }
+
+        iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            background: transparent;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #EB7E1F;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .preloader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .preloader-image {
+            width: 200px;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <img class="preloader-image" src="https://assets-v2.lottiefiles.com/a/009fccf8-1171-11ee-b7df-93d19199ced4/18pL8Oc9l6.gif" alt="Loading">
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a style="font-size: 30px;" href="lost-found.html">Pets don't get lost, they just go on a solo adventure... with a very confused GPS</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h1>Lost And Found Section Database </h1>
+        <!-- Airtable Embed -->
+        <iframe class="airtable-embed" src="https://airtable.com/embed/appxnWhNjpCMvBeVN/shr0tqoCUIWdLb3Xk?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+    </main>
+
+    <script>
+        setTimeout(function() {
+           document.getElementById("preloader").classList.add("hide");
+        }, 2300);
+    </script>
+
+</body>
+</html>
